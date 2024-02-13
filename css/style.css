@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+  
+  .pending-tasks {
+    /* No specific styles needed for the "Pending Tasks" section */
+  }
+  
+  .pending-tasks h1 {
+    margin-top: 0;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 5px;
+  }
+  
+  .queue {
+    /* No specific styles needed for the "Now Serving" section */
+  }
+  
+  .queue h1 {
+    margin-top: 0;
+  }
+  
+  #span-list {
+    font-size: 36px;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  /* Additional styles for the "Now Serving" queue number section */
+  #nowServing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  

@@ -1,0 +1,108 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.left {
+    background-color: #f5f5f5;
+    height: 1000px; /* Should be removed. Only for demonstration */
+}
+
+.right {
+    background-color: #f9f9f9;
+    height: 1000px; /* Should be removed. Only for demonstration */
+}
+
+h2 {
+    color: #333;
+}
+
+h3 {
+    color: #555;
+}
+
+.img-position {
+    display: block;
+    margin: 20px auto;
+}
+
+.number-size-h1-sc {
+    font-size: 28px;
+}
+
+.btn {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn i {
+    margin-right: 5px;
+}
+
+.logout-button {
+    margin-top: 10px;
+    text-align: right; 
+}
+
+ul.no-bullets {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.no-bullets li {
+    margin-bottom: 10px;
+}
+/*Font size for the first queue_num */
+ul.no-bullets li:first-child {
+    font-size: 36px; 
+    font-weight: bold;
+}
+
+ul.no-bullets li:not(:first-child) {
+    font-size: 16px;
+}
+/* Styles for the recent transactions table */
+.recent-transactions {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.recent-transactions th, .recent-transactions td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.recent-transactions th {
+    background-color: #f2f2f2;
+    font-size: 20px;
+}
+
+.recent-transactions tr.first-row td {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.recent-transactions td:not(.first-row) {
+    font-size: 18px;
+}
