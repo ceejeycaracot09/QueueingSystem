@@ -5,7 +5,6 @@ $conn = OpenCon();
 // Start the session
 session_start();
 
-// Assuming you have a session variable storing user ID
 if (isset($_SESSION['id'])) {
     $loggedInUserId = $_SESSION['id'];
 
@@ -40,6 +39,9 @@ if (isset($_SESSION['id'])) {
                 $updateStatusResult = $conn->query($updateStatusQuery);
 
                 if ($updateStatusResult) {
+                    // Store queue ID in session variable
+                    $_SESSION['nowServingQueueId'] = $queue_id;
+
                     // Display queue ID
                     echo $queue_id;
                 } else {

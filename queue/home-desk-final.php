@@ -1,3 +1,19 @@
+<?php
+// Start the session
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['id'])) {
+    // Redirect to the login page if not logged in
+    header("Location: ../login/desktop.html");
+    exit();  // Make sure to stop script execution after redirection
+}
+// Retrieve window number from URL parameter
+$department = isset($_GET['dept']) ? $_GET['dept'] : 'default_dept';
+$windowNumber = isset($_GET['window']) ? $_GET['window'] : 'default';
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +36,7 @@
 
     <div class="row">
         <div class="column left">
-            <h2 id = "officeContainer"><?php echo $office; ?></h2>
+            <h2 id = "officeContainer"><?php echo $department; ?></h2>
             <h1 id = "windowNumberContainer"class="number-size-h1"><?php echo $windowNumber; ?></h1>
             <h3>Window</h3>
         </div>
@@ -79,14 +95,8 @@
               method: 'GET',
               success: function (dataa) {
                   
-                  var dataArray = dataa.split(',');
 
-                  var pendingList = dataArray[0];
-                  var windowNumber  = dataArray[1];
-                  var office = dataArray[2];
-
-                  $('#officeContainer').html(office);
-                  $('#windowNumberContainer').html(windowNumber);
+                  
                   $('#waitingNumberTransactionContainer').html(pendingList);
               },
               error: handleAjaxError

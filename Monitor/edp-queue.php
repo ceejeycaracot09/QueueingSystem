@@ -1,37 +1,3 @@
-<?php
-include '../queue/queue.php';
-$conn = OpenCon();
-
-// Fetch the 5 most recent served transactions for the window
-$sql_transaction = "SELECT t.id, tt.department, t.transaction_window 
-                    FROM transaction_table t 
-                    JOIN transaction_type tt ON t.transaction_department = tt.id
-                    WHERE t.status = '2' AND t.created_on IS NOT NULL 
-                    ORDER BY t.created_on DESC LIMIT 5";
-
-$result_transaction = $conn->query($sql_transaction);
-
-// Display 5 results
-$recentTransactionsList = '<table class="recent-transactions">';
-$recentTransactionsList .= '<tr><th>Now Serving</th><th>Department</th><th>Window</th></tr>';
-$isFirst = true;
-while ($row = $result_transaction->fetch_assoc()) {
-    $queue_num = $row['id'];
-    $department = $row["department"];
-    $window_number = $row["transaction_window"];
-
-    $rowClass = $isFirst ? 'first-row' : '';
-
-    $recentTransactionsList .= '<tr class="' . $rowClass . '"><td>' . $queue_num . '</td><td>' . $department . '</td><td>' . $window_number . '</td></tr>';
-
-    $isFirst = false;
-}
-$recentTransactionsList .= '</table>';
-
-$conn->close();
-?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,12 +16,14 @@ $conn->close();
 <div class="row">
     <div class="column left">
         <h2>Waiting Number</h2>
+        <div id = "waitingNumberTransactionContainer">
         <h3 id="pendingQueue"><?= $pendingList ?></h3>
+        </div>
     </div>
     <div class="column right">
         <h2>Priority Number</h2>
         <!-- Display the Queue -->
-        <div>
+        <div id="recentTransactionsContainer">
             <h3><span id="span-list" class="number-size-h1-sc"><?= $recentTransactionsList ?></span></h3>
         </div>
     </div>
@@ -63,3 +31,40 @@ $conn->close();
 
 </body>
 </html>
+<script>
+    // Function that handles AJAX errors
+    function handleAjaxError(jqXHR, textStatus, errorThrown) {
+        console.error("AJAX Error:", textStatus, errorThrown);
+    }
+
+    // Function to load and refresh the recent transactions
+    function loadRecentTransactions() {
+        $.ajax({
+            url: 'refresh-table.php',  
+            method: 'GET',
+            success: function (data) {
+                $('#recentTransactionsContainer').html(data);
+            },
+            error: handleAjaxError  
+        });
+    }
+
+    loadRecentTransactions();
+    setInterval(loadRecentTransactions, 5000);
+
+    // Function to load and refresh the recent Waiting Number transactions
+    function loadRecentTransactionsWaitingNumber() {
+        $.ajax({
+            url: 'refresh-waiting-number.php',
+            method: 'GET',
+            success: function (dataa) {
+                console.log("Data received:", dataa);
+                $('#waitingNumberTransactionContainer').html(dataa);
+            },
+            error: handleAjaxError
+        });
+    }
+    loadRecentTransactionsWaitingNumber();
+    setInterval(loadRecentTransactionsWaitingNumber, 5000);
+
+</script>

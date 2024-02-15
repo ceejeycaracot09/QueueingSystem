@@ -21,11 +21,10 @@ body {
   box-sizing: border-box;
 }
 
-/* Create three unequal columns that floats next to each other */
 .column {
   float: left;
   padding: 10px;
-  height: 300px; /* Should be removed. Only for demonstration */
+  height: 300px; 
 }
 
 .left {
@@ -100,4 +99,7 @@ h1, h2, h3, h4 {
 ul.no-bullets {
   list-style-type: none;
   padding: 0;
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
 }
